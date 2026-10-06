@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Moralashes | Uñas, pestañas, cejas y queratina</title>
+
+  <meta
+    name="description"
+    content="Uñas, pestañas, manicure de cejas y queratina. Agenda tu cita por WhatsApp."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="hero">
+
+    <nav>
+      <strong id="logo">Moralashes</strong>
+
+      <a
+        class="btn btn-chico"
+        href="#reservar"
+      >
+        Pedir cita
+      </a>
+    </nav>
+
+    <div class="hero-contenido">
+
+      <p class="etiqueta">
+        BELLEZA · ESTILO · CUIDADO
+      </p>
+
+      <h1>Uñas que se notan.</h1>
+
+      <p class="sub">
+        Uñas, pestañas, cejas y queratina en un solo lugar,
+        siempre con cita.
+      </p>
+
+      <a class="btn" href="#servicios">
+        Ver servicios
+      </a>
+
+    </div>
+
+    <div class="picker">
+
+      <div
+        id="esmaltes"
+        role="radiogroup"
+        aria-label="Color de esmalte"
+      ></div>
+
+      <p>
+        Elige un esmalte:
+        <strong id="nombre-esmalte"></strong>.
+        Toda la página se pinta de ese color.
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <!-- SERVICIOS -->
+
+    <section id="servicios">
+
+      <p class="seccion-etiqueta">
+        LO QUE HACEMOS
+      </p>
+
+      <h2>Servicios</h2>
+
+      <div id="lista-servicios"></div>
+
+    </section>
+
+
+    <!-- RESERVAR -->
+
+    <section id="reservar">
+
+      <p class="seccion-etiqueta">
+        RESERVA TU CITA
+      </p>
+
+      <h2>Pide tu cita</h2>
+
+      <p class="nota">
+        Llena esto y se abre WhatsApp con tu mensaje listo para enviar.
+      </p>
+
+      <form id="form-cita">
+
+        <label>
+          Tu nombre
+
+          <input
+            id="nombre"
+            required
+            autocomplete="name"
+            placeholder="Escribe tu nombre"
+          >
+        </label>
+
+
+        <label>
+          Servicio
+
+          <select id="servicio"></select>
+        </label>
+
+
+        <div class="form-dos-columnas">
+
+          <label>
+            Fecha que te gustaría
+
+            <input
+              id="fecha"
+              type="date"
+            >
+          </label>
+
+
+          <label>
+            Hora aproximada
+
+            <input
+              id="hora"
+              type="time"
+            >
+          </label>
+
+        </div>
+
+
+        <label>
+          Algo más que debamos saber
+
+          <textarea
+            id="notas"
+            rows="3"
+            placeholder="Diseño, color, referencia..."
+          ></textarea>
+        </label>
+
+
+        <button
+          class="btn"
+          type="submit"
+        >
+          Enviar por WhatsApp
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- INFORMACIÓN -->
+
+    <section id="informacion">
+
+      <p class="seccion-etiqueta">
+        CONÓCENOS
+      </p>
+
+      <h2>Encuéntranos</h2>
+
+      <div class="info-grid">
+
+        <article class="info-item">
+
+          <span class="info-icon">📍</span>
+
+          <h3>Ubicación</h3>
+
+          <p id="ubicacion-preview">
+            Dirección próximamente
+          </p>
+
+        </article>
+
+
+        <article class="info-item">
+
+          <span class="info-icon">🕐</span>
+
+          <h3>Horario</h3>
+
+          <p>
+            Consulta nuestros horarios de atención
+            al final de la página.
+          </p>
+
+        </article>
+
+
+        <article class="info-item">
+
+          <span class="info-icon">📸</span>
+
+          <h3>Instagram</h3>
+
+          <p>
+            Síguenos para ver nuestros trabajos.
+          </p>
+
+          <a
+            href="https://instagram.com/mirtzz_111"
+            target="_blank"
+            rel="noopener"
+          >
+            @mirtzz_111
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer id="contacto"></footer>
+
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>
