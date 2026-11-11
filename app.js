@@ -13,15 +13,21 @@ const CONFIG = {
 const SERVICIOS = [
   {
     nombre: "Uñas",
-    texto: "Manicure y diseños para llevar en tus manos un estilo muy tuyo."
+    texto: "Manicure y diseños para llevar en tus manos un estilo muy tuyo.",
+    mensajeCita: "Me gustaría platicar sobre el diseño que tengo en mente y consultar disponibilidad.",
+    placeholder: "Cuéntame el color, diseño o idea que tienes en mente..."
   },
   {
     nombre: "Keratina",
-    texto: "Un tratamiento para ayudar a que tu cabello se sienta más suave y manejable."
+    texto: "Un tratamiento para ayudar a que tu cabello se sienta más suave y manejable.",
+    mensajeCita: "Me gustaría conocer el precio y los detalles del tratamiento de keratina.",
+    placeholder: "Si quieres, cuéntame qué te gustaría saber sobre el tratamiento..."
   },
   {
     nombre: "Rizado de pestañas",
-    texto: "Realza tu mirada con un rizado natural para tus pestañas."
+    texto: "Realza tu mirada con un rizado natural para tus pestañas.",
+    mensajeCita: "Me gustaría conocer el precio y los detalles del rizado de pestañas.",
+    placeholder: "Cuéntame si tienes alguna duda o el efecto que te gustaría..."
   }
 ];
 
@@ -85,9 +91,9 @@ function pintarEsmaltes() {
 
 function pintarServicios() {
   $("#lista-servicios").innerHTML = SERVICIOS.map(
-    (servicio) => `
+    (servicio, indice) => `
       <article class="servicio">
-        <div><h3>${servicio.nombre}</h3></div>
+        <div><span class="servicio-numero">0${indice + 1}</span><h3>${servicio.nombre}</h3></div>
         <p>${servicio.texto}</p>
         <a href="#reservar" data-servicio="${servicio.nombre}">Pedir cita</a>
       </article>
@@ -98,11 +104,20 @@ function pintarServicios() {
     (servicio) => `<option value="${servicio.nombre}">${servicio.nombre}</option>`
   ).join("");
 
+  const actualizarPlaceholder = () => {
+    const servicio = SERVICIOS.find((opcion) => opcion.nombre === $("#servicio").value);
+    $("#notas").placeholder = servicio.placeholder;
+  };
+
+  $("#servicio").addEventListener("change", actualizarPlaceholder);
+  actualizarPlaceholder();
+
   $("#lista-servicios").addEventListener("click", (evento) => {
     const enlace = evento.target.closest("a[data-servicio]");
 
     if (enlace) {
       $("#servicio").value = enlace.dataset.servicio;
+      actualizarPlaceholder();
     }
   });
 }
@@ -116,23 +131,26 @@ function enviarPorWhatsApp(evento) {
   const hora = $("#hora").value;
   const notas = $("#notas").value.trim();
   const fecha = fechaInput ? fechaInput.split("-").reverse().join("/") : "";
+  const datosServicio = SERVICIOS.find((opcion) => opcion.nombre === servicio);
 
-  let mensaje = `Hola, soy ${nombre}. Quiero agendar una cita para ${servicio}.`;
+  const partesMensaje = [
+    `Hola, soy ${nombre}. Me gustaría agendar una cita para ${servicio}.`,
+    datosServicio.mensajeCita
+  ];
 
-  if (fecha) {
-    mensaje += ` Me gustaría el día ${fecha}`;
-  }
-
-  if (hora) {
-    mensaje += ` a las ${hora}`;
+  if (fecha || hora) {
+    const fechaYHora = [
+      fecha ? `el ${fecha}` : "",
+      hora ? `alrededor de las ${hora}` : ""
+    ].filter(Boolean).join(" ");
+    partesMensaje.push(`La fecha y hora que prefiero son ${fechaYHora}.`);
   }
 
   if (notas) {
-    mensaje += ` ${notas}`;
+    partesMensaje.push(`Como referencia: ${notas}.`);
   }
 
-  mensaje += ".";
-
+  const mensaje = partesMensaje.join(" ");
   const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank", "noopener,noreferrer");
 }
@@ -142,6 +160,9 @@ function pintarDatosDelNegocio() {
   $("#ubicacion-preview").textContent = CONFIG.ubicacion;
   $("#instagram-link").href = `https://instagram.com/${CONFIG.instagram}`;
   $("#instagram-link").textContent = `@${CONFIG.instagram}`;
+
+  const mensajeResena = "Hola, ya tuve una cita en Moralashes y me gustaría compartir mi experiencia. Mi reseña es:";
+  $("#resena-link").href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensajeResena)}`;
 
   $("#contacto").innerHTML = `
     <div class="footer-contenido">
