@@ -43,7 +43,7 @@ h3,
   background: var(--accent);
   color: var(--on-accent);
 
-  padding: 20px 6vw 56px;
+  padding: 20px 6vw 34px;
 
   transition:
     background 0.45s,
@@ -55,7 +55,30 @@ nav {
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 9vh;
+  margin-bottom: clamp(24px, 3.5vh, 42px);
+}
+
+#logo {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-enlaces {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2.2vw, 28px);
+}
+
+.nav-enlaces > a:not(.btn) {
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-enlaces > a:not(.btn):hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
 }
 
 #logo {
@@ -65,6 +88,14 @@ nav {
 
 .hero-contenido {
   max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-contenido,
+nav {
+  position: relative;
+  z-index: 1;
 }
 
 .etiqueta,
@@ -76,7 +107,7 @@ nav {
 }
 
 h1 {
-  font-size: clamp(3.2rem, 11vw, 8rem);
+  font-size: clamp(3.2rem, 7vw, 5.6rem);
   line-height: 0.95;
   font-weight: 800;
 
@@ -89,7 +120,7 @@ h1 {
   font-size: 1.2rem;
   max-width: 34ch;
 
-  margin: 0 0 30px;
+  margin: 0 auto 26px;
 }
 
 
@@ -149,11 +180,12 @@ h1 {
 ========================= */
 
 .picker {
-  margin-top: 60px;
+  margin-top: 25px;
 }
 
 #esmaltes {
   display: flex;
+  justify-content: center;
   gap: 14px;
   align-items: flex-end;
 
@@ -234,6 +266,12 @@ section {
   padding: 90px 0 30px;
 }
 
+.section-intro {
+  max-width: 56ch;
+  margin: -16px 0 28px;
+  color: var(--muted);
+}
+
 h2 {
   font-size: 2.8rem;
   line-height: 1.1;
@@ -297,6 +335,62 @@ h2 {
   text-decoration-color: var(--accent);
   text-decoration-thickness: 4px;
   text-underline-offset: 4px;
+}
+
+.servicio a:hover {
+  text-decoration-thickness: 6px;
+}
+
+
+/* =========================
+   GALERÍA
+========================= */
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, 250px);
+  gap: 14px;
+}
+
+.foto-trabajo {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--line);
+  color: #fff;
+  text-decoration: none;
+}
+
+.foto-trabajo:first-child {
+  grid-row: span 2;
+}
+
+.foto-trabajo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.foto-trabajo:hover img {
+  transform: scale(1.04);
+}
+
+.foto-trabajo span {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 28px 15px 13px;
+  background: linear-gradient(transparent, rgba(43, 22, 49, 0.8));
+  font-weight: 600;
+}
+
+.foto-trabajo:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 3px;
 }
 
 
@@ -516,6 +610,12 @@ footer a {
   opacity: 0.7;
 }
 
+.firma-creador {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+}
+
 
 /* =========================
    WHATSAPP FLOTANTE
@@ -575,8 +675,28 @@ footer a {
 
 @media (max-width: 750px) {
 
+  nav {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .nav-enlaces {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 9px 14px;
+  }
+
+  .nav-enlaces > a:not(.btn) {
+    font-size: 0.82rem;
+  }
+
   .servicio {
     grid-template-columns: 1fr;
+  }
+
+  .galeria {
+    grid-template-rows: repeat(2, 210px);
+    gap: 10px;
   }
 
   .info-grid {
@@ -592,7 +712,7 @@ footer a {
   }
 
   nav {
-    margin-bottom: 6vh;
+    margin-bottom: 24px;
   }
 }
 
@@ -605,6 +725,42 @@ footer a {
 
   h2 {
     font-size: 2.3rem;
+  }
+
+  .hero {
+    padding: 18px 5vw 28px;
+  }
+
+  nav {
+    align-items: center;
+  }
+
+  .nav-enlaces {
+    max-width: 220px;
+    gap: 8px 11px;
+  }
+
+  .nav-enlaces > a:not(.btn) {
+    font-size: 0.73rem;
+  }
+
+  .nav-enlaces .btn {
+    padding: 7px 13px;
+    font-size: 0.82rem;
+  }
+
+  .galeria {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, 180px);
+    gap: 8px;
+  }
+
+  .foto-trabajo:first-child {
+    grid-row: span 2;
+  }
+
+  .foto-trabajo:nth-child(4) {
+    grid-column: span 2;
   }
 
   .footer-contenido {
